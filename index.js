@@ -9,11 +9,11 @@ db.connect()
 
 app.get('/', async (req, res, next) => {
     try {
-        const a = await Accounts.find();
-
-        res.json({
-            a: a
-        })
+        await Accounts.find()
+            .then(re => {
+                res.json(re)
+            })
+            .catch(next);
     } catch (error) {
         console.log(error)
     }
